@@ -41,12 +41,12 @@ class MotorDriver:
         self.enab_pin.high()
         
         if level > 0:
-            print("level > 0")
+            #print("level > 0")
             self.t3ch1.pulse_width_percent(0)
             self.t3ch2.pulse_width_percent(level)
        
         elif level < 0:
-            print("level < 0")
+            #print("level < 0")
             self.t3ch1.pulse_width_percent(-level)
             self.t3ch2.pulse_width_percent(0)
         

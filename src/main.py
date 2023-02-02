@@ -12,6 +12,7 @@ import utime
 import motor_driver
 import encoder_reader
 import position_driver
+import array
 
 
 
@@ -50,17 +51,35 @@ def main():
       
     p = True
 
-    pdriver.run(encreader.read(),1000,10)
+    pdriver.run(encreader.read(),100000,50)
 
-    while True:
-        #print("COUNTER", tim8.counter())
-        #print(encreader.read())
-        utime.sleep_ms(10)
-        posnow = encreader.read()
-        level = pdriver(posnow)
-        mdriver.set_duty_cycle(level)
-              
-    
+    time = array.array("i",300*[0])
+    pos = array.array("i",300*[0])
+
+    n = 0
+
+    timestart = utime.ticks_ms()
+
+    try:
+        while True:
+            #print("COUNTER", tim8.counter())
+            #print(encreader.read())
+            utime.sleep_ms(10)
+            posnow = encreader.read()
+            level = pdriver.run(posnow)
+            mdriver.set_duty_cycle(level)
+            timenow = utime.ticks_ms()
+            if n != 300:
+                time[n] = utime.ticks_diff(timenow,timestart)
+                pos[n] = posnow
+                n += 1
+            #print(f"position = {posnow}")
+
+    except KeyboardInterrupt:
+        mdriver.set_duty_cycle(0)
+        for i in range(n):
+            print(time[i],",",pos[i])
+
 
 if __name__ == '__main__':
     main()

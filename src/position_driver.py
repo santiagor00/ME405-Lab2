@@ -4,12 +4,13 @@ class PositionDriver:
         self.kp = 1
         self.setpoint = 256
 
-    def run(self,posnow, setpoint = "N", kp = "N"):
-        if kp != "N": self.kp = kp
-        if setpoint != "N": self.end = setpoint
+    def run(self,posnow, setpoint = 8675309, kp = 8675309):
+        if kp != 8675309: self.kp = kp/1000
+        if setpoint != 8675309: self.end = setpoint
 
         self.now = posnow
-        self.error = self.end - self.end
+        self.error = self.end - self.now
+        #print(self.error)
         level = self.error * self.kp
 
         if level > 100:
