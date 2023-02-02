@@ -53,4 +53,4 @@ class MotorDriver:
         else:
             self.t3ch1.pulse_width_percent(0)
             self.t3ch2.pulse_width_percent(0)
-        print (f"Setting duty cycle to {level}")
+        #print (f"Setting duty cycle to {level}")

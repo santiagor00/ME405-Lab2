@@ -59,9 +59,9 @@ class EncoderReader:
         
         self.delt = self.encnow - self.encthen
         self.encthen = self.encnow
-        print("encnow", self.encnow)
-        print("encthen", self.encthen)
-        print("delt", self.delt)
+        #print("encnow", self.encnow)
+        #print("encthen", self.encthen)
+        #print("delt", self.delt)
         reset = 32768
         if self.delt > reset:
             self.encthen = self.encnow
