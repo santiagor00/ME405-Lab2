@@ -13,8 +13,8 @@ import motor_driver
 import encoder_reader
 import position_driver
 import array
-import serial
-
+from pyb import repl_uart
+from pyb import UART
 
 
 
@@ -52,41 +52,56 @@ def main():
       
     p = True
 
-    pdriver.run(encreader.read(),100000,50)
+    
 
     time = array.array("i",300*[0])
     pos = array.array("i",300*[0])
 
     n = 0
+    start = "a"
 
-    with serial.serial("COM3",115200) as ser:
-        while not(ser.any()):
-            pass
-        ser.readline()
-        ser.readline()
-        ser.readline()
+    repl_uart(None)
 
-        timestart = utime.ticks_ms()
 
-        try:
-            while True:
-                #print("COUNTER", tim8.counter())
-                #print(encreader.read())
-                utime.sleep_ms(10)
-                posnow = encreader.read()
-                level = pdriver.run(posnow)
-                mdriver.set_duty_cycle(level)
-                timenow = utime.ticks_ms()
-                if n != 300:
-                    time[n] = utime.ticks_diff(timenow,timestart)
-                    pos[n] = posnow
-                    n += 1
-                #print(f"position = {posnow}")
+    ser = UART(2,115200)
+    while start != "start\r \n":
+        start = ser.readline()
+        print(start)
+        utime.sleep_ms(5)
+    
+    kp = ser.readline()
+    endpos = ser.readline()
 
-        except KeyboardInterrupt:
-            mdriver.set_duty_cycle(0)
-            for i in range(n):
-                print(time[i],",",pos[i])
+    kp = int(kp)
+    endpos = int(endpos)
+
+    pdriver.run(encreader.read(),endpos,kp)
+
+    timestart = utime.ticks_ms()
+
+    try:
+        while n <= 300:
+            #print("COUNTER", tim8.counter())
+            #print(encreader.read())
+            utime.sleep_ms(10)
+            posnow = encreader.read()
+            level = pdriver.run(posnow)
+            mdriver.set_duty_cycle(level)
+            timenow = utime.ticks_ms()
+            if n != 300:
+                time[n] = utime.ticks_diff(timenow,timestart)
+                pos[n] = posnow
+                n += 1
+            #print(f"position = {posnow}")
+
+    except KeyboardInterrupt:
+        mdriver.set_duty_cycle(0)
+        for i in range(n):
+            print(time[i],",",pos[i])
+    
+    mdriver.set_duty_cycle(0)
+    for i in range(n):
+        print(time[i],",",pos[i])
 
 
 if __name__ == '__main__':

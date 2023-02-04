@@ -5,17 +5,30 @@ numx = []
 numy = []
 good = [False, False]
 
-kp = input("what is the value of kp? ")
-endpos = input("what is the final position? ")
+#kp = input("what is the value of kp? ")
+#endpos = input("what is the final position? ")
 
-with serial.serial("COM3",115200) as file:
+kp = 50
+endpos = 100000
 
-    file.write("start\n")
-    file.write(f"{kp}\n")
-    file.write(f"{endpos}\n")
+with serial.Serial("COM4",115200) as file:
+
+    file.write(b"start\r \n")
+    print("started")
+    #kpstr = exec(f"b'{kp}'")
+    #file.write(kpstr)
+    exec(f"file.write(b'{kp}')")
+
+    file.write(b"\r \n")
+    #posstr = exec(f"b'{endpos}'")
+    #file.write(posstr)
+    exec(f"file.write(b'{endpos}')")
+
+    file.write(b"\r \n")
     
-    while not(file.any()):
-        pass
+    waiter = file.in_waiting
+    while waiter == 0:
+        waiter = file.in_waiting
     titlestr = file.readline()
     titlesep = titlestr.split(",")
     titlex = titlesep[0]
