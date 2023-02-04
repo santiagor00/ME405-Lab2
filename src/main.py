@@ -13,6 +13,7 @@ import motor_driver
 import encoder_reader
 import position_driver
 import array
+import serial
 
 
 
@@ -58,27 +59,34 @@ def main():
 
     n = 0
 
-    timestart = utime.ticks_ms()
+    with serial.serial("COM3",115200) as ser:
+        while not(ser.any()):
+            pass
+        ser.readline()
+        ser.readline()
+        ser.readline()
 
-    try:
-        while True:
-            #print("COUNTER", tim8.counter())
-            #print(encreader.read())
-            utime.sleep_ms(10)
-            posnow = encreader.read()
-            level = pdriver.run(posnow)
-            mdriver.set_duty_cycle(level)
-            timenow = utime.ticks_ms()
-            if n != 300:
-                time[n] = utime.ticks_diff(timenow,timestart)
-                pos[n] = posnow
-                n += 1
-            #print(f"position = {posnow}")
+        timestart = utime.ticks_ms()
 
-    except KeyboardInterrupt:
-        mdriver.set_duty_cycle(0)
-        for i in range(n):
-            print(time[i],",",pos[i])
+        try:
+            while True:
+                #print("COUNTER", tim8.counter())
+                #print(encreader.read())
+                utime.sleep_ms(10)
+                posnow = encreader.read()
+                level = pdriver.run(posnow)
+                mdriver.set_duty_cycle(level)
+                timenow = utime.ticks_ms()
+                if n != 300:
+                    time[n] = utime.ticks_diff(timenow,timestart)
+                    pos[n] = posnow
+                    n += 1
+                #print(f"position = {posnow}")
+
+        except KeyboardInterrupt:
+            mdriver.set_duty_cycle(0)
+            for i in range(n):
+                print(time[i],",",pos[i])
 
 
 if __name__ == '__main__':
