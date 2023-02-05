@@ -1,6 +1,6 @@
 """!
 @package docstring
-Lab 1 - Motor Driver
+Lab 2 - Out of Control
 
 @file motor_driver.py
 """
