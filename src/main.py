@@ -122,5 +122,5 @@ if __name__ == '__main__':
     while True:
         main()
     #ser = UART(2,115200)
-    #ser.write(b"fuck this shit")
+
 
