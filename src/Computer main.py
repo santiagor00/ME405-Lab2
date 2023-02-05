@@ -12,20 +12,17 @@ try:
         if kp == "plot" or kp == "plot1": raise KeyboardInterrupt
         endpos = input("what is the final position? ")
 
-        #kp = 50
-        #endpos = 100000
+        
 
         with serial.Serial("COM4",115200) as file:
 
             file.write(b"start")
             print("started")
-            #kpstr = exec(f"b'{kp}'")
-            #file.write(kpstr)
+            
             exec(f"file.write(b'{kp}')")
 
             file.write(b"\r \n")
-            #posstr = exec(f"b'{endpos}'")
-            #file.write(posstr)
+            
             exec(f"file.write(b'{endpos}')")
 
             file.write(b"\r \n")
@@ -33,10 +30,7 @@ try:
             waiter = file.in_waiting
             while waiter == 0:
                 waiter = file.in_waiting
-            #titlestr = file.readline()
-            #titlesep = titlestr.split(",")
-            #titlex = titlesep[0]
-            #titley = titlesep[1]
+            
 
             data = []
             numx = []
