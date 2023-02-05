@@ -5,11 +5,11 @@ numx = []
 numy = []
 good = [False, False]
 
-#kp = input("what is the value of kp? ")
-#endpos = input("what is the final position? ")
+kp = input("what is the value of kp? ")
+endpos = input("what is the final position? ")
 
-kp = 50
-endpos = 100000
+#kp = 50
+#endpos = 100000
 
 with serial.Serial("COM4",115200) as file:
 
@@ -37,7 +37,8 @@ with serial.Serial("COM4",115200) as file:
     data = []
 
     for asdf in range(300):
-        data.append(file.readline())
+        datastr = file.readline()
+        data.append(datastr.decode())
     
     for line in data:
         str = line
@@ -76,8 +77,8 @@ with serial.Serial("COM4",115200) as file:
             print(f"both strings bad {sep}")
 
             
-titley = titley.strip()
+#titley = titley.strip()
 pyplot.plot(numx,numy)
-pyplot.xlabel(titlex)
-pyplot.ylabel(titley)
+pyplot.xlabel("time (ms)")
+pyplot.ylabel("Position")
 pyplot.show()

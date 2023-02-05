@@ -114,12 +114,13 @@ def main():
     
     mdriver.set_duty_cycle(0)
     for i in range(n):
-        exec(f"ser.write(b'{time[i]},{pos[i]}\\r \\n')")
-        #ser.write(time[i],",",pos[i],"\r \n")
+        #exec(f"ser.write(b'{time[i]},{pos[i]}\\r \\n')")
+        ser.write(f"{time[i]},{pos[i]}\r \n")
 
 
 if __name__ == '__main__':
-    main()
+    while True:
+        main()
     #ser = UART(2,115200)
     #ser.write(b"fuck this shit")
 
