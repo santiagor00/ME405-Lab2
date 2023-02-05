@@ -8,7 +8,7 @@ Then, the main MCU program will run a step response on the electric motor.
 The main MCU program sends position data to the PC program, which will create a
 plot of position vs. time. Data from the MCU is sent through UART2. UART stands for universal 
 asynchronous receiver-transmitter, and UART2 allows serial transmission of data from the MCU
-to the PC while the VCP is simultaneously free to send data from the PC to the MCU.
+to the PC while the VCP is simultaneously free to send debug data from the PC to the MCU.
 
 ![Everything graph](https://user-images.githubusercontent.com/122561488/216850585-818e5f8e-ea35-4ff9-aa0a-b4d629850ad4.png)
 
