@@ -96,7 +96,7 @@ def main():
         while n <= 299:
             #print("COUNTER", tim8.counter())
             #print(encreader.read())
-            utime.sleep_ms(10)
+            utime.sleep_ms(15)
             posnow = encreader.read()
             level = pdriver.run(posnow)
             mdriver.set_duty_cycle(level)
