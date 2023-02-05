@@ -2,9 +2,7 @@
 This directory contains code to perform step response tests on electric motors. The main PC program will ask the user to 
 input Kp values, which represent the proportional gain on the feedback loop for encoder position. After receiving a Kp 
 value from the user, the main PC program will send the Kp value to the MCU. This directory contains code to perform step 
-response tests on electric motors. The main PC program will ask the user to input Kp values, which represent the 
-proportional gain on the feedback loop for encoder position. After receiving a Kp value from the user, the main PC 
-program will send the Kp value to the MCU. Data transmission from the PC to the MCU is done through the VCP (Virtual Com 
+response tests on electric motors. Data transmission from the PC to the MCU is done through the VCP (Virtual Com 
 Port), which allows data to be transmitted in the form of bytes.
 
 Then, the main MCU program will run a step response on the electric motor. 
