@@ -67,7 +67,7 @@ def main():
     ser = UART(2,115200)
     while start != "start":
         while waiter == 0:
-            waiter = ser.in_waiting
+            waiter = ser.any()
         startbyte = ser.read(5)
         start = startbyte.decode()
         print(start)
