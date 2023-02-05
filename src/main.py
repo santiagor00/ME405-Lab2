@@ -114,7 +114,7 @@ def main():
     
     mdriver.set_duty_cycle(0)
     for i in range(n):
-        exec(f"ser.write(b'{time[i]},{pos[i]}\r \n')")
+        exec(f"ser.write(b'{time[i]},{pos[i]}\\r \\n')")
         #ser.write(time[i],",",pos[i],"\r \n")
 
 

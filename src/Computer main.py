@@ -29,12 +29,17 @@ with serial.Serial("COM4",115200) as file:
     waiter = file.in_waiting
     while waiter == 0:
         waiter = file.in_waiting
-    titlestr = file.readline()
-    titlesep = titlestr.split(",")
-    titlex = titlesep[0]
-    titley = titlesep[1]
+    #titlestr = file.readline()
+    #titlesep = titlestr.split(",")
+    #titlex = titlesep[0]
+    #titley = titlesep[1]
+
+    data = []
+
+    for asdf in range(300):
+        data.append(file.readline())
     
-    for line in file:
+    for line in data:
         str = line
         sep = str.split(",")
 
