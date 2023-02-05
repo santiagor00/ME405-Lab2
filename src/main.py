@@ -69,12 +69,21 @@ def main():
         while waiter == 0:
             waiter = ser.any()
         startbyte = ser.read(5)
+        #print(startbyte)
         start = startbyte.decode()
-        print(start)
+        #print(start)
         utime.sleep_ms(5)
     
     kp = ser.readline()
     endpos = ser.readline()
+    #print(kp)
+    #print(endpos)
+
+    kp = kp.decode()
+    endpos = endpos.decode()
+
+    kp = kp.strip()
+    endpos = endpos.strip()
 
     kp = int(kp)
     endpos = int(endpos)
@@ -84,7 +93,7 @@ def main():
     timestart = utime.ticks_ms()
 
     try:
-        while n <= 300:
+        while n <= 299:
             #print("COUNTER", tim8.counter())
             #print(encreader.read())
             utime.sleep_ms(10)
@@ -105,7 +114,8 @@ def main():
     
     mdriver.set_duty_cycle(0)
     for i in range(n):
-        print(time[i],",",pos[i])
+        exec(f"ser.write(b'{time[i]},{pos[i]}\r \n')")
+        #ser.write(time[i],",",pos[i],"\r \n")
 
 
 if __name__ == '__main__':

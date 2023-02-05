@@ -13,7 +13,7 @@ endpos = 100000
 
 with serial.Serial("COM4",115200) as file:
 
-    file.write(b"start\r \n")
+    file.write(b"start")
     print("started")
     #kpstr = exec(f"b'{kp}'")
     #file.write(kpstr)
