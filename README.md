@@ -9,4 +9,7 @@ plot of position vs. time.
 
 ![Everything graph](https://user-images.githubusercontent.com/122561488/216850585-818e5f8e-ea35-4ff9-aa0a-b4d629850ad4.png)
 
-kp too low was 5, kp too high was 50, and perfect kp was 15
+Figure 1: For a Kp value of 5, the system exhibited underdamped behavior as seen in the plot. There was almost no 
+oscillation. For a Kp value of 15, the system underwent a "perfectly damped" response, which can be seen in the single 
+overshoot that precedes the steady state behavior. A Kp value of 50 led to the excesive oscillations seen in an overdamped 
+system.
