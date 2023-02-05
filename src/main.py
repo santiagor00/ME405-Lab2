@@ -59,13 +59,17 @@ def main():
 
     n = 0
     start = "a"
+    waiter = 0
 
     repl_uart(None)
 
 
     ser = UART(2,115200)
-    while start != "start\r \n":
-        start = ser.readline()
+    while start != "start":
+        while waiter == 0:
+            waiter = ser.in_waiting
+        startbyte = ser.read(5)
+        start = startbyte.decode()
         print(start)
         utime.sleep_ms(5)
     
@@ -106,4 +110,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+    #ser = UART(2,115200)
+    #ser.write(b"fuck this shit")
 
