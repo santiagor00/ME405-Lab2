@@ -23,7 +23,8 @@ from pyb import UART
 def main():
 
     """!
-    @brief Prepare the pins, timers, and everything necessary, then run the motor while reading the encoder.
+    @brief Prepare the pins, timers, and everything necessary, then waits for serial input to run the motor while reading the encoder. Sends data from encoder over serial once complete.
+    @details prepares timers and pins to read encoder and send PWM to motor. Waits for serial input of kp and end position from computer main on UART2, runs the motor with these values, then sends encoder data back over UART2.
     """
     
 
