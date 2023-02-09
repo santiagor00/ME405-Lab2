@@ -2,7 +2,7 @@
 @package docstring
 Lab 2 - Out of Control
 
-@file Computer main.py
+@file Computer_main.py
 
 @brief Takes a value of kp and final position then starts running the motor. When done, makes plots.
 @details Runs in a loop to repeat the process of starting the motor with potentially different kp and end position, and sends this over com4. Once all loops are complete, it prints a single plot with all runs separated.
